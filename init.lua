@@ -8,3 +8,7 @@ require("walter.plugins.nvim-tree")
 require("walter.plugins.lualine")
 require("walter.plugins.telescope")
 require("walter.plugins.nvim-cmp")
+
+require("walter.plugins.lsp.mason")
+require("walter.plugins.lsp.lspsaga")
+require("walter.plugins.lsp.lspconfig")
