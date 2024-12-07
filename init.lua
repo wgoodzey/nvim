@@ -5,6 +5,7 @@ require("walter.core.colorscheme")
 
 require("walter.plugins.comment")
 require("walter.plugins.nvim-tree")
+require("walter.plugins.nvim-web-devicons")
 require("walter.plugins.lualine")
 require("walter.plugins.telescope")
 require("walter.plugins.nvim-cmp")

@@ -12,6 +12,7 @@ end
 
 -- configure telescope
 telescope.setup({
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     -- configure custom mappings
     defaults = {
         mappings = {
