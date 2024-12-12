@@ -11,6 +11,7 @@ opt.expandtab = true
 opt.autoindent = true
 
 -- line wrapping
+opt.linebreak = true
 opt.ignorecase = true
 opt.smartcase = true
 
