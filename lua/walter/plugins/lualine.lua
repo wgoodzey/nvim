@@ -8,8 +8,6 @@ lualine.setup({
     options = {
         --theme = '', -- Example theme; choose any theme you like
         icons_enabled = true,
-        section_separators = { left = '|', right = '|' },
-        component_separators = { left = '◂', right = '▸' },
     },
     sections = {
         lualine_a = {'mode'},
