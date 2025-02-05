@@ -30,6 +30,10 @@ end
 return packer.startup(function(use)
     -- packer can manage itself
     use("wbthomason/packer.nvim")
+    
+    use { "catppuccin/nvim", as = "catppuccin" }
+
+    -- use("bluz71/vim-moonfly-colors") -- colortheme
 
     use("nvim-lua/plenary.nvim")
 

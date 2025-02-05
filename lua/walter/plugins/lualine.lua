@@ -6,7 +6,7 @@ local setup, lualine = pcall(require, "lualine")
 lualine.setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     options = {
-        --theme = '', -- Example theme; choose any theme you like
+        theme = 'catppuccin', -- Example theme; choose any theme you like
         icons_enabled = true,
     },
     sections = {
