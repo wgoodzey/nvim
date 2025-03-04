@@ -42,7 +42,34 @@ lspconfig["clangd"].setup({
     capabilities = capabilities,
     on_attach = on_attach,
     filetypes = { "c", "cpp", "objc", "objcpp" },
-    cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
+    cmd = { 
+        "clangd", 
+        "--background-index",
+        "--clang-tidy",
+        "--header-insertion=never",
+        "--all-scopes-completion",
+        "--pch-storage=memory",
+    },
+})
+
+lspconfig["jdtls"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    cmd = { "jdtls" }, -- Mason installs jdtls globally
+    root_dir = require("lspconfig.util").root_pattern("pom.xml", "build.gradle", ".git"),
+    settings = {
+        java = {
+            completion = {
+                enabled = true
+            },
+            signatureHelp = {
+                enabled = true
+            },
+            contentProvider = {
+                preferred = "fernflower"
+            }
+        }
+    },
 })
 
 lspconfig["ltex"].setup({
