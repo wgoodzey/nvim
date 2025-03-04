@@ -38,12 +38,11 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-
-lspconfig["ast_grep"].setup({
-   capabilities = capabilities,
-   on_attach = on_attach,
-   -- cmd = { "ast-grep", "lsp" },
-   filetypes = { "c", "cpp", "rust", "go", "java", "python", "javascript", "typescript", "html", "css", "kotlin", "dart", "lua" },
+lspconfig["clangd"].setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    filetypes = { "c", "cpp", "objc", "objcpp" },
+    cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
 })
 
 lspconfig["ltex"].setup({

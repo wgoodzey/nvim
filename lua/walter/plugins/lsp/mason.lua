@@ -15,7 +15,6 @@ mason.setup()
 mason_lspconfig.setup({
     ensure_installed = {
         "ltex",
-        "ast_grep",
-        -- "lua_ls",
+        "clangd",
     }
 })
