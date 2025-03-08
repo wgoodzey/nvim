@@ -49,6 +49,7 @@ lspconfig["clangd"].setup({
         "--header-insertion=never",
         "--all-scopes-completion",
         "--pch-storage=memory",
+        "--compile-commands-dir=build", -- Cmake stuff
     },
 })
 
