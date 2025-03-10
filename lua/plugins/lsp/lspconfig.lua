@@ -83,3 +83,7 @@ lspconfig["lua_ls"].setup({
     on_attach = on_attach
 })
 
+lspconfig["pyright"].setup({
+    capabities = capabilities,
+    on_attach = on_attach
+})

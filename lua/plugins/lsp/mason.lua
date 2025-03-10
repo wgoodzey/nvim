@@ -18,5 +18,6 @@ mason_lspconfig.setup({
         "clangd",
         "jdtls",
         "lua_ls",
+        "pyright",
     }
 })
