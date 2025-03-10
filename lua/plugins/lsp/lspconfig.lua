@@ -74,6 +74,12 @@ lspconfig["jdtls"].setup({
 })
 
 lspconfig["ltex"].setup({
-    capabilities = capabilities,
+    capabities = capabilities,
     on_attach = on_attach
 })
+
+lspconfig["lua_ls"].setup({
+    capabities = capabilities,
+    on_attach = on_attach
+})
+

@@ -17,5 +17,6 @@ mason_lspconfig.setup({
         "ltex",
         "clangd",
         "jdtls",
+        "lua_ls",
     }
 })
