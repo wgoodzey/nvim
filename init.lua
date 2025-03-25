@@ -10,6 +10,8 @@ require("plugins.lualine")
 require("plugins.telescope")
 require("plugins.nvim-cmp")
 
+require("plugins.toggleterm")
+
 require("plugins.lsp.mason")
 require("plugins.lsp.lspsaga")
 require("plugins.lsp.lspconfig")

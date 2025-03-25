@@ -30,7 +30,14 @@ end
 return packer.startup(function(use)
     -- packer can manage itself
     use("wbthomason/packer.nvim")
-    
+
+    use({
+        "akinsho/toggleterm.nvim",
+        config = function()
+            require("plugins.toggleterm")
+        end,
+    })
+
     use { "catppuccin/nvim", as = "catppuccin" }
 
     -- use("bluz71/vim-moonfly-colors") -- colortheme
