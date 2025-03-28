@@ -38,6 +38,8 @@ return packer.startup(function(use)
         end,
     })
 
+    -- use("lervag/vimtex")
+
     use { "catppuccin/nvim", as = "catppuccin" }
 
     -- use("bluz71/vim-moonfly-colors") -- colortheme
@@ -93,6 +95,9 @@ return packer.startup(function(use)
 
     -- treesitter
     use("nvim-treesitter/nvim-treesitter")
+
+    -- diffview
+    use("sindrets/diffview.nvim")
 
     if packer_bootstrap then
         require("packer").sync()
