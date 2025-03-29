@@ -42,6 +42,26 @@ return packer.startup(function(use)
 
     use { "catppuccin/nvim", as = "catppuccin" }
 
+    use {
+    'cameron-wags/rainbow_csv.nvim',
+    config = function()
+        require 'rainbow_csv'.setup()
+    end,
+    -- optional lazy-loading below
+    module = {
+        'rainbow_csv',
+        'rainbow_csv.fns'
+    },
+    ft = {
+        'csv',
+        'tsv',
+        'csv_semicolon',
+        'csv_whitespace',
+        'csv_pipe',
+        'rfc_csv',
+        'rfc_semicolon'
+    }
+}
     -- use("bluz71/vim-moonfly-colors") -- colortheme
 
     use("nvim-lua/plenary.nvim")
