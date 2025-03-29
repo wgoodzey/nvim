@@ -39,5 +39,6 @@ keymap.set("n","<leader>fb", "<cmd>Telescope buffers<cr>")
 keymap.set("n","<leader>fh", "<cmd>Telescope help_tags<cr>")
 
 -- diffviewer
-keymap.set("n","<leader>do", "<cmd>DiffviewFileHistory <cr>")
+keymap.set("n","<leader>do", "<cmd>DiffviewOpen <cr>")
 keymap.set("n","<leader>dc", "<cmd>DiffviewClose <cr>")
+keymap.set("n","<leader>dh", "<cmd>DiffviewFileHistory <cr>")
