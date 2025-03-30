@@ -4,16 +4,16 @@ if not saga_status then
 end
 
 saga.setup({
-    ui = {
-        border = "rounded",
-        devicon = true,
-    },
-    symbol_in_winbar = {
-        enable = true,
-        separator = "  ",
-        hide_keyword = true,
-    },
-    lightbulb = {
-        enable = false,
-    },
+	ui = {
+		border = "rounded",
+		devicon = true,
+	},
+	symbol_in_winbar = {
+		enable = true,
+		separator = "  ",
+		hide_keyword = true,
+	},
+	lightbulb = {
+		enable = false,
+	},
 })

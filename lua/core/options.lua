@@ -13,6 +13,7 @@ opt.relativenumber = true
 local tab_width = 2
 opt.tabstop = tab_width
 opt.shiftwidth = tab_width
+opt.softtabstop = 4
 opt.expandtab = false
 opt.autoindent = true
 
