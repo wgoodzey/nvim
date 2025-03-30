@@ -3,6 +3,18 @@ if not saga_status then
     return
 end
 
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "-",
+    spacing = 4,
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
+
 saga.setup({
 	ui = {
 		border = "rounded",

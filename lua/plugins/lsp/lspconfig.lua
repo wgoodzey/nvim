@@ -32,9 +32,24 @@ keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts)									-- see ou
 
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
+local on_attach = function(client, bufnr)
+  -- show diagnostics in a float on CursorHold
+  vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+      vim.diagnostic.open_float(nil, {
+        focusable = false,
+        border = "rounded",
+        source = "always",
+        prefix = "",
+      })
+    end,
+  })
+end
+
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSicn" .. type
+  local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
@@ -80,7 +95,6 @@ lspconfig["ltex"].setup({
 
 lspconfig["lua_ls"].setup({
 	capabilities = capabilities,
-	capabities = capabilities,
 	on_attach = on_attach
 })
 
