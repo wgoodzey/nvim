@@ -14,7 +14,6 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-
 saga.setup({
 	ui = {
 		border = "rounded",
