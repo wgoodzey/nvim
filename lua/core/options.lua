@@ -10,9 +10,10 @@ opt.number = true
 opt.relativenumber = true
 
 -- tabs & indentation
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
+local tab_width = 2
+opt.tabstop = tab_width
+opt.shiftwidth = tab_width
+opt.expandtab = false
 opt.autoindent = true
 
 -- line wrapping
