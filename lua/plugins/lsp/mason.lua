@@ -19,5 +19,10 @@ mason_lspconfig.setup({
         "jdtls",
         "lua_ls",
         "pyright",
+				"html",
+				"cssls",
+				"ts_ls",
+				"emmet_ls",
+				"tailwindcss"
     }
 })

@@ -102,3 +102,72 @@ lspconfig["pyright"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach
 })
+
+-- HTML
+lspconfig["html"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+-- CSS
+lspconfig["cssls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
+-- JavaScript / TypeScript / React
+lspconfig["ts_ls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_dir = require("lspconfig.util").root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
+})
+
+-- Emmet (optional)
+lspconfig["emmet_ls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = {
+    "html", "css", "scss", "javascriptreact", "typescriptreact",
+  },
+})
+
+lspconfig["tailwindcss"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = {
+    "html",
+    "css",
+    "scss",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue", -- if you ever use it
+  },
+  init_options = {
+    userLanguages = {
+      eelixir = "html",
+      eruby = "html",
+      heex = "html",
+    },
+  },
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "ngClass" },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidScreen = "error",
+        invalidVariant = "error",
+        invalidConfigPath = "error",
+        recommendedVariantOrder = "warning",
+      },
+      experimental = {
+        classRegex = {
+          -- Add any custom regex if you're using special class utilities
+        },
+      },
+    },
+  },
+})
