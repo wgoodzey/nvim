@@ -54,18 +54,21 @@ for type, icon in pairs(signs) do
 end
 
 lspconfig["clangd"].setup({
-	capabilities = capabilities,
+  capabilities = capabilities,
   on_attach = on_attach,
-  filetypes = { "c", "cpp", "objc", "objcpp" },
-	cmd = {
-		"clangd",
+  root_dir = require("lspconfig.util").root_pattern(
+    "compile_commands.json",
+    "compile_flags.txt",
+    ".git"
+  ),
+  cmd = {
+    "clangd",
     "--background-index",
     "--clang-tidy",
     "--header-insertion=never",
     "--all-scopes-completion",
     "--pch-storage=memory",
-    "--compile-commands-dir=build", -- Cmake stuff
-    },
+  },
 })
 
 lspconfig["jdtls"].setup({
