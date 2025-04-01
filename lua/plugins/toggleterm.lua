@@ -1,6 +1,6 @@
 local setup, toggleterm = pcall(require, "toggleterm")
 if not setup then
-    return
+	return
 end
 
 toggleterm.setup({

@@ -2,7 +2,6 @@ local opt = vim.opt
 
 -- opt.scrolloff = 3
 
-
 opt.colorcolumn = "80"
 
 -- line nubmers
