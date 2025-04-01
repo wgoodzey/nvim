@@ -1,5 +1,5 @@
 -- Setup for Catppuccin
-require("Catppuccin").setup({
+require("catppuccin").setup({
 	flavour = "mocha", -- You can choose between "latte", "frappe", "macchiato", and my favorite "mocha"
 	integrations = {
 		treesitter = true,
