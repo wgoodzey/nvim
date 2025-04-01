@@ -53,6 +53,7 @@ lspconfig["clangd"].setup({
     "--header-insertion=never",
     "--all-scopes-completion",
     "--pch-storage=memory",
+    "compile_flags.txt",
     "--compile-commands-dir=build" .. vim.fn.getcwd() .. "/build", -- Cmake stuff
     },
 })
