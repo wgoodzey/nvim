@@ -37,25 +37,44 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-lspconfig["clangd"].setup({
-    capabilities = capabilities,
+-- Get current working directory
+local cwd = vim.fn.getcwd()
+
+-- Check for CMake-style compilation database
+local has_compile_commands = vim.fn.filereadable(cwd .. "/build/compile_commands.json") == 1
+
+-- Check for compile_flags.txt
+local has_compile_flags = vim.fn.filereadable(cwd .. "/compile_flags.txt") == 1
+
+-- Build the cmd list dynamically
+local clangd_cmd = {
+  "clangd",
+  "--background-index",
+  "--clang-tidy",
+  "--header-insertion=never",
+  "--all-scopes-completion",
+  "--pch-storage=memory",
+}
+
+-- If we have compile_commands.json, add it
+if has_compile_commands then
+  table.insert(clangd_cmd, "--compile-commands-dir=" .. cwd .. "/build")
+end
+
+-- (no need to manually pass compile_flags.txt — clangd auto-detects it)
+
+-- Setup clangd LSP
+lspconfig.clangd.setup({
+  cmd = clangd_cmd,
+  capabilities = capabilities,
   on_attach = on_attach,
-  root_dir = require("lspconfig.util").root_pattern(
-      "compile_commands.json",
-      "compile_flags.txt",
-      ".git"
-  ),
   filetypes = { "c", "cpp", "objc", "objcpp" },
-    cmd = {
-        "clangd",
-    "--background-index",
-    "--clang-tidy",
-    "--header-insertion=never",
-    "--all-scopes-completion",
-    "--pch-storage=memory",
+  -- root detection: triggers LSP startup
+  root_dir = require("lspconfig.util").root_pattern(
+    "compile_commands.json",
     "compile_flags.txt",
-    "--compile-commands-dir=build" .. vim.fn.getcwd() .. "/build", -- Cmake stuff
-    },
+    ".git"
+  ),
 })
 
 lspconfig["jdtls"].setup({
