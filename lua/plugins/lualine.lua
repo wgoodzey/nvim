@@ -17,7 +17,7 @@ end
 
 local function battery_status()
   local sysname_handle = io.popen("uname")
-  if not sysname_handle then return "🔋 --%" end
+  if not sysname_handle then return "" end
 
   local sysname = sysname_handle:read("*l")
   sysname_handle:close()
@@ -30,40 +30,48 @@ local function battery_status()
   end
 
   local handle = io.popen(cmd)
-  if not handle then return "🔋 --%" end
+  if not handle then return "" end
 
   local result = handle:read("*a")
   handle:close()
 
-  if not result or result == "" then return "🔋 --%" end
+  if not result or result == "" then return "" end
 
   result = result:gsub("[\r\n]", ""):match("^%s*(.-)%s*$")
 
   local percent, status
 
   if sysname == "Darwin" then
-    -- macOS parsing
     percent = result:match("(%d?%d?%d)%%")
-    status = result:match("%%;%s*(%a+);") -- grabs 'charging', 'discharging', or 'charged'
+    -- Match common statuses first
+    status = result:match("%%;%s*([%a]+);")
+    -- Handle "AC attached; not charging"
+    if not status and result:match("%%;%s*AC attached;%s*not charging") then
+      status = "ac"
+    end
   else
-    -- Linux (acpi) parsing
+    -- If no battery support (likely a desktop), skip
+    if result:lower():find("no support") or result:lower():find("unavailable") then
+      return ""
+    end
     status, percent = result:match("Battery %d+: ([%a%s]+),%s*(%d?%d?%d)%%")
   end
 
   if not percent or not status then
-    return escape_statusline("🔋 --%")
+    return ""
   end
 
   local icon = "🔋"
   status = status:lower()
   if status:find("charging") then
     icon = "⚡"
-  elseif status:find("charged") or status:find("full") then
+  elseif status:find("charged") or status:find("full") or status == "ac" then
     icon = "🔌"
   end
 
   return escape_statusline(string.format("%s %s%%", icon, percent))
 end
+
 
 lualine.setup({
 	dependencies = {
