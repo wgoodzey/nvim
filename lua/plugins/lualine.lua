@@ -16,8 +16,20 @@ local function escape_statusline(str)
 end
 
 local function battery_status()
-  local handle = io.popen("acpi -b")
-	-- pmset -g batt | grep -Eo "\d+%|discharging|charging|charged|[0-9]+:[0-9]{2}" | paste -s -d, - | sed 's/^/Battery 0: /'
+  local sysname_handle = io.popen("uname")
+  if not sysname_handle then return "🔋 --%" end
+
+  local sysname = sysname_handle:read("*l")
+  sysname_handle:close()
+
+  local cmd
+  if sysname == "Darwin" then
+    cmd = "pmset -g batt"
+  else
+    cmd = "acpi -b"
+  end
+
+  local handle = io.popen(cmd)
   if not handle then return "🔋 --%" end
 
   local result = handle:read("*a")
@@ -27,8 +39,18 @@ local function battery_status()
 
   result = result:gsub("[\r\n]", ""):match("^%s*(.-)%s*$")
 
-  local status, percent = result:match("Battery %d+: ([%a%s]+),%s*(%d?%d?%d)%%")
-  if not percent then
+  local percent, status
+
+  if sysname == "Darwin" then
+    -- macOS parsing
+    percent = result:match("(%d?%d?%d)%%")
+    status = result:match("%%;%s*(%a+);") -- grabs 'charging', 'discharging', or 'charged'
+  else
+    -- Linux (acpi) parsing
+    status, percent = result:match("Battery %d+: ([%a%s]+),%s*(%d?%d?%d)%%")
+  end
+
+  if not percent or not status then
     return escape_statusline("🔋 --%")
   end
 
@@ -36,7 +58,7 @@ local function battery_status()
   status = status:lower()
   if status:find("charging") then
     icon = "⚡"
-  elseif status:find("full") then
+  elseif status:find("charged") or status:find("full") then
     icon = "🔌"
   end
 
