@@ -17,6 +17,7 @@ end
 
 local function battery_status()
   local handle = io.popen("acpi -b")
+	-- pmset -g batt | grep -Eo "\d+%|discharging|charging|charged|[0-9]+:[0-9]{2}" | paste -s -d, - | sed 's/^/Battery 0: /'
   if not handle then return "🔋 --%" end
 
   local result = handle:read("*a")
