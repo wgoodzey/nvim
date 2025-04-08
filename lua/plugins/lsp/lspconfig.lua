@@ -99,7 +99,8 @@ lspconfig["jdtls"].setup({
 
 lspconfig["ltex"].setup({
 	capabilities = capabilities,
-	on_attach = on_attach
+	on_attach = on_attach,
+	filetypes = { "txt", "markdown", "tex" }
 })
 
 lspconfig["lua_ls"].setup({
@@ -175,6 +176,39 @@ lspconfig["tailwindcss"].setup({
       experimental = {
         classRegex = {
           -- Add any custom regex if you're using special class utilities
+        },
+      },
+    },
+  },
+})
+
+-- Rust
+lspconfig["rust_analyzer"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "rust" },
+  root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json", ".git"),
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+      checkOnSave = {
+        command = "clippy",
+      },
+      inlayHints = {
+        typeHints = true,
+        parameterHints = true,
+        chainingHints = true,
+      },
+      assist = {
+        importMergeBehavior = "last",
+        importPrefix = "by_self",
+      },
+      diagnostics = {
+        enable = true,
+        experimental = {
+          enable = true,
         },
       },
     },
