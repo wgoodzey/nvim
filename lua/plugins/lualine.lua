@@ -4,7 +4,7 @@ if not setup then
 end
 
 local function clock()
-	return os.date("%H:%M:%S")
+	return os.date("%I:%M:%S %p")
 end
 
 local function escape_statusline(str)
