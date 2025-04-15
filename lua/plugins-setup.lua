@@ -58,6 +58,8 @@ return packer.startup(function(use)
 	use { "williamboman/mason.nvim" }							-- manages LSP servers,
 	use { "williamboman/mason-lspconfig.nvim" }		-- bridges mason with lspconfig
 
+	use { "akinsho/flutter-tools.nvim" }			-- for Flutter
+
 	use { "neovim/nvim-lspconfig" }						-- configure language servers
 	use { "hrsh7th/cmp-nvim-lsp" }						-- for autocompletion
 	use { "nvimdev/lspsaga.nvim",
