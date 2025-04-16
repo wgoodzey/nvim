@@ -37,13 +37,15 @@ keymap.set("n","<leader>fs", "<cmd>Telescope live_grep<cr>")
 keymap.set("n","<leader>fc", "<cmd>Telescope grep_string<cr>")
 keymap.set("n","<leader>fb", "<cmd>Telescope buffers<cr>")
 keymap.set("n","<leader>fh", "<cmd>Telescope help_tags<cr>")
+keymap.set("n","<leader>t", "<cmd>Telescope<cr>")
 
 -- diffviewer
 keymap.set("n","<leader>do", "<cmd>DiffviewOpen <cr>")
 keymap.set("n","<leader>dc", "<cmd>DiffviewClose <cr>")
 keymap.set("n","<leader>dh", "<cmd>DiffviewFileHistory <cr>")
 
-keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)											-- show definition, references
+-- LSP
+keymap.set("n", "gf", "<cmd>Lspsaga finder<CR>", opts)													-- show definition, references
 keymap.set("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)						-- got to declaration
 keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<CR>", opts)									-- see definition and make edits in window
 keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)				-- go to implementation
