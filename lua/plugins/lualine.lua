@@ -1,3 +1,5 @@
+vim.o.cmdheight = 0
+
 local setup, lualine = pcall(require, "lualine")
 if not setup then
 	return
@@ -72,22 +74,44 @@ local function battery_status()
   return escape_statusline(string.format("%s %s%%", icon, percent))
 end
 
-
-lualine.setup({
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
-	options = {
-		theme = "catppuccin",
-		icons_enabled = true,
-	},
-	sections = {
-		lualine_a = { 'mode' },
-		lualine_b = { 'branch' },
-		lualine_c = { 'filename' },
+lualine.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    always_show_tabline = true,
+    globalstatus = true,
+    refresh = {
+      statusline = 100,
+      tabline = 100,
+      winbar = 100,
+    }
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
 		lualine_x = { battery_status, clock, 'encoding', 'fileformat', 'filetype' },
-		-- lualine_x = { clock, 'encoding', 'fileformat', 'filetype' },
-		lualine_y = { 'progress' },
-		lualine_z = { 'location' },
-	},
-})
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
