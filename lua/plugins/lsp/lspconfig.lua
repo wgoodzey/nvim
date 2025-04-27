@@ -120,6 +120,12 @@ lspconfig["ltex"].setup({
 	filetypes = { "txt", "markdown", "tex" }
 })
 
+lspconfig["tinymist"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "typst" },
+})
+
 lspconfig["lua_ls"].setup({
 	capabilities = capabilities,
 	on_attach = on_attach
@@ -150,7 +156,7 @@ lspconfig["ts_ls"].setup({
   root_dir = require("lspconfig.util").root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
 })
 
--- Emmet (optional)
+-- Emmet
 lspconfig["emmet_ls"].setup({
   capabilities = capabilities,
   on_attach = on_attach,

@@ -82,6 +82,8 @@ return packer.startup(function(use)
 		end,
 	}																					-- for a powerful terminal inside neovim
 
+	use { "kaarmu/typst.vim" }								-- typst syntax highlighting
+
 	use { "cameron-wags/rainbow_csv.nvim",
 		config = function()
 			require("rainbow_csv").setup()
