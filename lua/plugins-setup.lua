@@ -55,8 +55,10 @@ return packer.startup(function(use)
 	use { "rafamadriz/friendly-snippets" }		-- for snippets
 
 	-- LSP, linters, and formatters
-	use { "williamboman/mason.nvim" }							-- manages LSP servers,
-	use { "williamboman/mason-lspconfig.nvim" }		-- bridges mason with lspconfig
+	use { "williamboman/mason.nvim",
+				tag = "v1.8.3" }							-- manages LSP servers,
+	use { "williamboman/mason-lspconfig.nvim",
+				tag = "v1.24.0" }		-- bridges mason with lspconfig
 
 	use { "akinsho/flutter-tools.nvim" }			-- for Flutter
 
