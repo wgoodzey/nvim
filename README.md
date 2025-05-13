@@ -6,6 +6,7 @@ npm
 ripgrep
 git
 fd
+unzip
 tree-sitter-cli (npm install -g tree-sitter-cli)
 xregexp (npm install -g xregexp)
 ```
