@@ -9,7 +9,7 @@ opt.number = true
 opt.relativenumber = true
 
 -- tabs & indentation
-local tab_width = 4
+local tab_width = 2
 opt.tabstop = tab_width
 opt.shiftwidth = tab_width
 opt.softtabstop = 4
