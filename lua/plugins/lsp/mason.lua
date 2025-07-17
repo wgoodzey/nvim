@@ -12,18 +12,20 @@ end
 
 mason.setup()
 
-mason_lspconfig.setup({
-	ensure_installed = {
-		"ltex",
-		"clangd",
-		"jdtls",
-		"lua_ls",
-		"pyright",
-		"html",
-		"cssls",
-		"ts_ls",
-		"emmet_ls",
-		"tailwindcss",
-		"rust_analyzer",
-	}
-})
+-- mason_lspconfig.setup({
+-- 	ensure_installed = {
+-- 		"ltex",
+-- 		"clangd",
+-- 		"jdtls",
+-- 		"lua_ls",
+-- 		"pyright",
+-- 		"html",
+-- 		"cssls",
+-- 		"ts_ls",
+-- 		"emmet_ls",
+-- 		"tailwindcss",
+-- 		"rust_analyzer",
+-- 		"tinymist",
+--	  "asm_lsp",
+-- 	}
+-- })

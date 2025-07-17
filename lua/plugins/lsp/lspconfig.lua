@@ -252,3 +252,8 @@ lspconfig["rust_analyzer"].setup({
 		},
 	},
 })
+
+-- ASM
+lspconfig["asm_lsp"].setup({
+	filetypes = { "asm", "s", "S" },
+})

@@ -1,5 +1,6 @@
 require("plugins-setup")
 require("core.options")
+require("core.ftsettings")
 require("core.keymaps")
 require("core.colorscheme")
 
