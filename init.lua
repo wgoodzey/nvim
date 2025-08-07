@@ -16,6 +16,8 @@ require("plugins.toggleterm")
 require("plugins.lsp.mason")
 require("plugins.lsp.lspsaga")
 require("plugins.lsp.lspconfig")
+
+-- langauge specific formatting
 require("plugins.lsp.java")
 
 require("plugins.flutter-tools")
