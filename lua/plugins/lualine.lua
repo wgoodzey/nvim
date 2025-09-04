@@ -20,39 +20,26 @@ end
 local function battery_status()
   local sysname_handle = io.popen("uname")
   if not sysname_handle then return "" end
-
   local sysname = sysname_handle:read("*l")
   sysname_handle:close()
 
-  local cmd
-  if sysname == "Darwin" then
-    cmd = "pmset -g batt"
-  else
-    cmd = "acpi -b"
-  end
-
+  local cmd = (sysname == "Darwin") and "pmset -g batt" or "acpi -b"
   local handle = io.popen(cmd)
   if not handle then return "" end
 
-  local result = handle:read("*a")
+  local result = handle:read("*a") or ""
   handle:close()
-
-  if not result or result == "" then return "" end
-
+  if result == "" then return "" end
   result = result:gsub("[\r\n]", ""):match("^%s*(.-)%s*$")
 
   local percent, status
-
   if sysname == "Darwin" then
     percent = result:match("(%d?%d?%d)%%")
-    -- Match common statuses first
     status = result:match("%%;%s*([%a]+);")
-    -- Handle "AC attached; not charging"
     if not status and result:match("%%;%s*AC attached;%s*not charging") then
       status = "ac"
     end
   else
-    -- If no battery support (likely a desktop), skip
     if result:lower():find("no support") or result:lower():find("unavailable") then
       return ""
     end
@@ -74,32 +61,55 @@ local function battery_status()
   return escape_statusline(string.format("%s %s%%", icon, percent))
 end
 
-lualine.setup {
+-- NEW: define the component and its color
+local function battery_component()
+  return battery_status()
+end
+
+local function battery_color()
+  local s = battery_status()
+  local pct = tonumber((s or ""):match("(%d+)%%"))
+  if not pct then return {} end
+  if pct < 20 then
+    return { fg = "#ff5555" } -- red-ish
+  elseif pct < 50 then
+    return { fg = "#f1fa8c" } -- yellow-ish
+  else
+    return { fg = "#50fa7b" } -- green-ish
+  end
+end
+
+local function has_battery()
+  local sys = (jit and jit.os) or vim.loop.os_uname().sysname
+  if tostring(sys):find("Darwin") or tostring(sys):find("Windows") then
+    return true
+  end
+  return vim.fn.glob("/sys/class/power_supply/BAT*") ~= ""
+end
+
+local lualine_x = { clock, 'encoding', 'fileformat', 'filetype' }
+if has_battery() then
+  table.insert(lualine_x, 1, { battery_component, color = battery_color })
+end
+
+require("lualine").setup {
   options = {
     icons_enabled = true,
     theme = 'auto',
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
+    disabled_filetypes = { statusline = {}, winbar = {} },
     ignore_focus = {},
     always_divide_middle = true,
     always_show_tabline = true,
     globalstatus = true,
-    refresh = {
-      statusline = 100,
-      tabline = 100,
-      winbar = 100,
-    }
+    refresh = { statusline = 100, tabline = 100, winbar = 100 },
   },
   sections = {
     lualine_a = { 'mode' },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = { 'filename' },
-    -- lualine_x = { clock, 'encoding', 'fileformat', 'filetype' },
-    lualine_x = { battery_status, clock, 'encoding', 'fileformat', 'filetype' },
+    lualine_x = lualine_x,
     lualine_y = { 'progress' },
     lualine_z = { 'location' }
   },
@@ -116,3 +126,4 @@ lualine.setup {
   inactive_winbar = {},
   extensions = {}
 }
+
