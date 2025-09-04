@@ -107,6 +107,16 @@ return packer.startup(function(use)
 
   use { "mfussenegger/nvim-jdtls" }
 
+  use { "lukas-reineke/virt-column.nvim",
+    config = function()
+      require("virt-column").setup({
+        virtcolumn = "80", -- where to show the guideline
+        char = "│", -- the symbol used for the guide
+        highlight = { "VirtColumn" }, -- link to your Catppuccin hl group
+      })
+    end,
+  } --
+
   -- use { "" }	--
 
   if packer_bootstrap then
