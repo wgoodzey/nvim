@@ -79,9 +79,20 @@ local function battery_color()
   end
 end
 
+-- local function has_battery()
+--   local sys = (jit and jit.os) or vim.loop.os_uname().sysname
+--   if tostring(sys):find("Darwin") or tostring(sys):find("Windows") then
+--     return true
+--   end
+--   return vim.fn.glob("/sys/class/power_supply/BAT*") ~= ""
+-- end
+
 local function has_battery()
-  local sys = (jit and jit.os) or vim.loop.os_uname().sysname
-  if tostring(sys):find("Darwin") or tostring(sys):find("Windows") then
+  local sys = (vim.loop.os_uname and vim.loop.os_uname().sysname)
+              or (jit and jit.os)
+              or ""
+  sys = tostring(sys):lower()
+  if sys:find("darwin") or sys:find("osx") or sys:find("mac") or sys:find("windows") then
     return true
   end
   return vim.fn.glob("/sys/class/power_supply/BAT*") ~= ""
