@@ -30,7 +30,7 @@ require("catppuccin").setup({
     local u = require("catppuccin.utils.colors")
     return {
       ColorColumn = { bg = u.darken(colors.base, 0.85, colors.crust) },
-      CursorLine  = { bg = u.lighten(colors.surface0, 0.95, colors.text) },
+      CursorLine  = { fg = u.lighten(colors.surface0, 0.95, colors.text) },
     }
   end,
 })
