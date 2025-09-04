@@ -30,7 +30,6 @@ end
 -- add list of plugins to install
 return packer.startup(function(use)
   use { "wbthomason/packer.nvim" }         -- Packer can manage self
-  use { "catppuccin/nvim", as = "catppuccin" }
   use { "nvim-lua/plenary.nvim" }          -- needed for a lot of plugins
   use { "christoomey/vim-tmux-navigator" } -- move between splits with control + vim-motions
   use { "szw/vim-maximizer" }
@@ -112,10 +111,14 @@ return packer.startup(function(use)
       require("virt-column").setup({
         virtcolumn = "80", -- where to show the guideline
         char = "│", -- the symbol used for the guide
-        highlight = { "VirtColumn" }, -- link to your Catppuccin hl group
+        highlight = { "VirtColumn" },
       })
     end,
-  } --
+  } -- For vertical line
+
+  -- color themes
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use { "thesimonho/kanagawa-paper.nvim" }
 
   -- use { "" }	--
 
