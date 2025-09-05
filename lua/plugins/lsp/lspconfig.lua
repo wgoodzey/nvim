@@ -79,26 +79,6 @@ lspconfig.clangd.setup({
   ),
 })
 
-lspconfig["jdtls"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = { "jdtls" }, -- Mason installs jdtls globally
-  root_dir = require("lspconfig.util").root_pattern("pom.xml", "build.gradle", ".git"),
-  settings = {
-    java = {
-      completion = {
-        enabled = true
-      },
-      signatureHelp = {
-        enabled = true
-      },
-      contentProvider = {
-        preferred = "fernflower"
-      }
-    }
-  },
-})
-
 lspconfig["ltex"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
