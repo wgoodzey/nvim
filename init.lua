@@ -18,6 +18,6 @@ require("plugins.lsp.lspsaga")
 require("plugins.lsp.lspconfig")
 
 -- langauge specific formatting
-require("plugins.lsp.java")
+require("plugins.lsp.languages.java")
 
 require("plugins.flutter-tools")

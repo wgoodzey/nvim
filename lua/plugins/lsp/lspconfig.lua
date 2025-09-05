@@ -25,59 +25,8 @@ end
 -- Get current working directory
 local cwd = vim.fn.getcwd()
 
--- Check for CMake-style compilation database
-local has_compile_commands = vim.fn.filereadable(cwd .. "/build/compile_commands.json") == 1
-
--- Check for compile_flags.txt
-local has_compile_flags = vim.fn.filereadable(cwd .. "/compile_flags.txt") == 1
-
--- Build the cmd list dynamically
-local clangd_cmd = {
-  "clangd",
-  "--background-index",
-  "--clang-tidy",
-  "--header-insertion=never",
-  "--all-scopes-completion",
-  "--pch-storage=memory",
-}
-
--- If we have compile_commands.json, add it
-if has_compile_commands then
-  table.insert(clangd_cmd, "--compile-commands-dir=" .. cwd .. "/build")
-end
-
--- Determine if this is a Pico SDK project
-local function is_pico_project()
-  local cwd = vim.fn.getcwd()
-  -- Simple heuristic: look for pico_sdk_init.cmake or check if PICO_SDK_PATH exists
-  if vim.fn.glob(cwd .. "/pico_sdk_init.cmake") ~= "" then
-    return true
-  end
-  if vim.fn.getenv("PICO_SDK_PATH") ~= vim.NIL then
-    return true
-  end
-  return false
-end
-
-if is_pico_project() then
-  table.insert(clangd_cmd, "--query-driver=/usr/bin/arm-none-eabi-gcc")
-end
-
--- (no need to manually pass compile_flags.txt — clangd auto-detects it)
-
--- Setup clangd LSP
-lspconfig.clangd.setup({
-  cmd = clangd_cmd,
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = { "c", "cpp", "objc", "objcpp" },
-  -- root detection: triggers LSP startup
-  root_dir = require("lspconfig.util").root_pattern(
-    "compile_commands.json",
-    "compile_flags.txt",
-    ".git"
-  ),
-})
+require("plugins.lsp.languages.clangd").setup(lspconfig, capabilities, on_attach)
+require("plugins.lsp.format").setup()
 
 lspconfig["ltex"].setup({
   capabilities = capabilities,
