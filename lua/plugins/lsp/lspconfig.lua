@@ -26,6 +26,8 @@ end
 local cwd = vim.fn.getcwd()
 
 require("plugins.lsp.languages.clangd").setup(lspconfig, capabilities, on_attach)
+require("plugins.lsp.languages.rust_analyzer").setup(lspconfig, capabilities, on_attach)
+require("lua.plugins.lsp.languages.tailwindcss").setup(lspconfig, capabilities, on_attach)
 require("plugins.lsp.format").setup()
 
 lspconfig["ltex"].setup({
@@ -76,79 +78,6 @@ lspconfig["emmet_ls"].setup({
   on_attach = on_attach,
   filetypes = {
     "html", "css", "scss", "javascriptreact", "typescriptreact",
-  },
-})
-
-lspconfig["tailwindcss"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = {
-    "html",
-    "css",
-    "scss",
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue", -- if you ever use it
-  },
-  init_options = {
-    userLanguages = {
-      eelixir = "html",
-      eruby = "html",
-      heex = "html",
-    },
-  },
-  settings = {
-    tailwindCSS = {
-      classAttributes = { "class", "className", "ngClass" },
-      lint = {
-        cssConflict = "warning",
-        invalidApply = "error",
-        invalidScreen = "error",
-        invalidVariant = "error",
-        invalidConfigPath = "error",
-        recommendedVariantOrder = "warning",
-      },
-      experimental = {
-        classRegex = {
-          -- Add any custom regex if you're using special class utilities
-        },
-      },
-    },
-  },
-})
-
--- Rust
-lspconfig["rust_analyzer"].setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = { "rust" },
-  root_dir = require("lspconfig.util").root_pattern("Cargo.toml", "rust-project.json", ".git"),
-  settings = {
-    ["rust-analyzer"] = {
-      cargo = {
-        allFeatures = true,
-      },
-      checkOnSave = {
-        command = "clippy",
-      },
-      inlayHints = {
-        typeHints = true,
-        parameterHints = true,
-        chainingHints = true,
-      },
-      assist = {
-        importMergeBehavior = "last",
-        importPrefix = "by_self",
-      },
-      diagnostics = {
-        enable = true,
-        experimental = {
-          enable = true,
-        },
-      },
-    },
   },
 })
 
