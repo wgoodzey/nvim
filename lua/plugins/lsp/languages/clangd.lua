@@ -49,10 +49,26 @@ end
 
 -- Public setup API (keeps lspconfig.lua tiny)
 function M.setup(lspconfig, capabilities, on_attach)
+  -- Wrap the user's on_attach with your custom callback
+  local function custom_on_attach(client, bufnr)
+    -- Call the user's on_attach first (if any)
+    if on_attach then
+      on_attach(client, bufnr)
+    end
+
+    -- Custom: Highlight negative numbers in C/C++ buffers
+    vim.api.nvim_buf_call(bufnr, function()
+      vim.cmd([[
+        syntax match MyNegativeNumber /\v-\d+(\.\d+)?/ containedin=ALL
+        highlight link MyNegativeNumber Number
+      ]])
+    end)
+  end
+
   lspconfig.clangd.setup({
     cmd = build_cmd(),
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = custom_on_attach,
     filetypes = { "c", "cpp", "objc", "objcpp" },
     root_dir = root_dir,
   })
