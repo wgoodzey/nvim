@@ -28,6 +28,7 @@ local cwd = vim.fn.getcwd()
 require("plugins.lsp.languages.clangd").setup(lspconfig, capabilities, on_attach)
 require("plugins.lsp.languages.rust_analyzer").setup(lspconfig, capabilities, on_attach)
 require("plugins.lsp.languages.tailwindcss").setup(lspconfig, capabilities, on_attach)
+require("plugins.lsp.languages.ocaml").setup(lspconfig, capabilities, on_attach)
 require("plugins.lsp.format").setup()
 
 lspconfig["ltex"].setup({
