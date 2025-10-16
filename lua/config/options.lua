@@ -12,3 +12,4 @@ vim.opt.linebreak = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.cursorline = true
+vim.opt.clipboard = "unnamedplus"
