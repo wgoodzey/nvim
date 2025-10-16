@@ -7,6 +7,10 @@ map("n", "<leader>w", ":w<CR>", opts)
 map("n", "<leader>q", ":q<CR>", opts)
 map("n", "<leader>h", ":nohlsearch<CR>", opts)
 
+-- Window splitting
+map("n", "<leader>sv", function() vim.cmd("vsplit") end, opts)
+map("n", "<leader>sh", function() vim.cmd("split") end, opts)
+
 -- Better window movement
 map("n", "<C-h>", "<C-w>h", opts)
 map("n", "<C-j>", "<C-w>j", opts)

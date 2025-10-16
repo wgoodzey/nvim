@@ -18,5 +18,9 @@ require("lazy").setup("plugins", {
   rocks = { enabled = false }
 })
 
+vim.g.loader_ruby_provider = 0
+vim.g.loader_pearl_provider = 0
+vim.g.loader_node_provider = 0
+
 require("config.options")
 require("config.keymaps")
