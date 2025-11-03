@@ -9,7 +9,8 @@ return {
         layout_strategy = "flex",
         mappings = {
           i = { ["<C-j>"] = "move_selection_next", ["<C-k>"] = "move_selection_previous" }
-        }
+        },
+        file_ignore_patterns = { "^%.git/" },
       },
       pickers = { find_files = { hidden = true } }
     },
