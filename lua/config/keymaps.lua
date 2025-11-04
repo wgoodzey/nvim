@@ -7,8 +7,8 @@ map("n", "<leader>w", ":w<CR>", opts)
 map("n", "<leader>q", ":q<CR>", opts)
 map("n", "<leader>h", ":nohlsearch<CR>", opts)
 
-map("n", ":", ";", opts)
-map("n", ";", ":", opts)
+-- map("n", ":", ";", opts)
+-- map("n", ";", ":", opts)
 
 -- Window splitting
 map("n", "<leader>sv", function() vim.cmd("vsplit") end, opts)

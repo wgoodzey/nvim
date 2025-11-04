@@ -142,6 +142,7 @@ return {
 
       setup("pyright")
       setup("rust_analyzer")
+      setup("marksman")
 
       pcall(function()
         require("mason").setup()
