@@ -3,6 +3,7 @@ return {
   {
     "stevearc/oil.nvim",
     lazy = false,
+    -- prompt_save_on_select_new_entry = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     float = {
         padding = 2,
