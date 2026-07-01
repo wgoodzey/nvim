@@ -1,16 +1,14 @@
 -- nvim/lua/plugins/treesitter.lua
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    "romus204/tree-sitter-manager.nvim",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
       ensure_installed = { "c", "cpp", "java", "python", "bash", "lua", "vim", "vimdoc", "json", "yaml", "markdown" },
+      highlight = true,
     },
     config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
+      require("tree-sitter-manager").setup(opts)
     end
   }
 }
