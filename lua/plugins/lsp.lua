@@ -57,7 +57,7 @@ return {
         },
       })
 
-      local servers = { "clangd", "lua_ls", "pyright", "rust_analyzer", "marksman" }
+      local servers = { "clangd", "lua_ls", "pyright", "rust_analyzer", "marksman", "jdtls" }
 
       for _, name in ipairs(servers) do
         vim.lsp.enable(name)
