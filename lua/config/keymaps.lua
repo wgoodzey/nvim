@@ -20,6 +20,12 @@ map("n", "<C-j>", "<C-w>j", opts)
 map("n", "<C-k>", "<C-w>k", opts)
 map("n", "<C-l>", "<C-w>l", opts)
 
+-- for terminal mode
+map('t', '<C-h>', [[<C-\><C-n><C-w>h]])
+map('t', '<C-j>', [[<C-\><C-n><C-w>j]])
+map('t', '<C-k>', [[<C-\><C-n><C-w>k]])
+map('t', '<C-l>', [[<C-\><C-n><C-w>l]])
+
 -- LSP (when attached)
 map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 map("n", "<leader>cr", vim.lsp.buf.rename, opts)
